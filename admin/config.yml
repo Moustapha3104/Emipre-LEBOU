@@ -4,7 +4,7 @@ backend:
 
 locale: fr
 publish_mode: editorial_workflow
-site_url: https://empirelebou.netlify.app/
+site_url: https://empirelebou.netlify.app
 display_url: https://empirelebou.netlify.app
 # Évite qu'un brouillon affiche un lien de prévisualisation vers la production.
 show_preview_links: false
