@@ -20,6 +20,8 @@ En production, seuls les articles avec `published: true` sont générés. Les De
 
 Les Deploy Previews ne sont pas produits par chaque sauvegarde : Netlify en construit un pour une pull request. L’aperçu intégré au CMS peut afficher le rendu du contenu, mais un Deploy Preview public requiert la pull request.
 
+Les liens Netlify Identity de réinitialisation et d'invitation arrivent parfois sur la page d'accueil avec un jeton dans le fragment de l'URL. Le script du catalogue transfère désormais ces liens vers `/admin/` avant de modifier le fragment, afin que le widget Identity puisse afficher le formulaire de réinitialisation ou d'acceptation.
+
 ## Rédiger un article
 
 1. Dans `/admin/`, sélectionnez **Articles → Nouvel article**.

@@ -1,4 +1,13 @@
+(() => {
 'use strict'
+
+// Netlify Identity sends recovery and invitation tokens to the site URL.
+// Forward them before the catalogue replaces the URL fragment with its category.
+const identityHash = new URLSearchParams(window.location.hash.slice(1))
+if (['recovery_token', 'invite_token', 'confirmation_token'].some((token) => identityHash.has(token))) {
+  window.location.replace(`/admin/${window.location.hash}`)
+  return
+}
 
 // Format international sans signe + ni espaces.
 const WHATSAPP_NUMBER = '221786305685'
@@ -231,3 +240,4 @@ document.querySelectorAll('[data-wa-icon]').forEach((n) => n.replaceWith(waIcon(
 
 const fromHash = location.hash.slice(1).toUpperCase()
 render(PRODUCTS[fromHash] ? fromHash : 'HOMME')
+})()
