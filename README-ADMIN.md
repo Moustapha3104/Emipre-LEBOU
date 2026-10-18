@@ -16,11 +16,21 @@ En production, seuls les articles avec `published: true` sont générés. Les De
 4. Dans **Site configuration → Build & deploy → Continuous deployment**, vérifiez que le dépôt GitHub `Moustapha3104/Emipre-LEBOU` est bien lié et que la branche de production est `main`.
 5. Pour prévisualiser un article avant publication, activez les Deploy Previews pour les pull requests de ce dépôt. Les brouillons doivent passer par une branche et une pull request afin que Netlify produise un Deploy Preview.
 6. Dans **Identity → Users**, invitez votre adresse email. Ouvrez le lien d’invitation reçu et définissez un mot de passe.
-7. Ouvrez `https://delicate-beijinho-4ff122.netlify.app/admin/`, connectez-vous et vérifiez que la collection **Articles** est visible.
+7. Ouvrez `https://empirelebou.netlify.app/admin/`, connectez-vous et vérifiez que la collection **Articles** est visible.
 
 Les Deploy Previews ne sont pas produits par chaque sauvegarde : Netlify en construit un pour une pull request. L’aperçu intégré au CMS peut afficher le rendu du contenu, mais un Deploy Preview public requiert la pull request.
 
-Les liens Netlify Identity de réinitialisation et d'invitation arrivent parfois sur la page d'accueil avec un jeton dans le fragment de l'URL. Le script du catalogue transfère désormais ces liens vers `/admin/` avant de modifier le fragment, afin que le widget Identity puisse afficher le formulaire de réinitialisation ou d'acceptation.
+### Lien de réinitialisation du mot de passe
+
+Le modèle de récupération fourni dans `identity/recovery.html` pointe directement vers `/admin/#recovery_token=...`, afin que le widget Identity affiche le formulaire de nouveau mot de passe.
+
+Après déploiement du fichier :
+
+1. Dans Netlify, ouvrez **Identity → Emails → Recovery email** et choisissez le modèle personnalisé. Indiquez `/identity/recovery.html` comme chemin du modèle, puis enregistrez.
+2. Demandez un nouvel e-mail de récupération depuis **Identity → Users**. Les liens déjà envoyés restent inchangés.
+3. Dans l'e-mail, cliquez sur **Choisir un nouveau mot de passe**. Le formulaire doit s'ouvrir sur `/admin/`.
+
+Netlify réserve la personnalisation des modèles d'e-mail aux offres qui incluent cette option. Si le champ de modèle personnalisé n'est pas disponible dans votre tableau de bord, demandez une nouvelle récupération depuis le bouton **Forgot password?** de `/admin/` après avoir confirmé que Git Gateway et Identity sont actifs ; le transfert automatique du jeton depuis la page d'accueil est également géré par `js/app.js`.
 
 ## Rédiger un article
 
@@ -44,7 +54,7 @@ Variable non secrète définie par défaut dans `netlify.toml` :
 
 | Variable | Valeur par défaut | Utilité |
 | --- | --- | --- |
-| `SITE_URL` | `https://empirelebou.netlify.app/.netlify.app` | Domaine utilisé pour les URL canoniques, Open Graph et le sitemap. Remplacez-la par votre domaine personnalisé si nécessaire. |
+| `SITE_URL` | `https://empirelebou.netlify.app` | Domaine utilisé pour les URL canoniques, Open Graph et le sitemap. Remplacez-la par votre domaine personnalisé si nécessaire. |
 
 Aucun secret ou jeton ne doit être ajouté au dépôt ni à une variable de build pour l’authentification : Identity et Git Gateway gèrent cette connexion.
 
