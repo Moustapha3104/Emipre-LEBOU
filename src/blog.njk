@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Le journal
+description: Les actualités, conseils et inspirations d'Empire Lebuu.
+permalink: /blog/index.html
+eleventyExcludeFromCollections: true
+---
+<main class="blog-main">
+  <header class="blog-list-header">
+    <p class="blog-eyebrow">Empire Lebuu</p>
+    <h1>Le journal</h1>
+    <p>Inspirations, conseils et actualités autour de la mode.</p>
+  </header>
+  {% set articles = collections.blogArticles %}
+  {% if articles.length %}
+  <section class="blog-grid" aria-label="Articles">
+    {% for article in articles %}
+    <article class="blog-card">
+      <a href="{{ article.url }}">
+        <img src="{{ article.data.cover_image | articleImage }}" alt="{{ article.data.cover_alt }}" width="720" height="480" loading="lazy">
+        <div class="blog-card-copy">
+          <p class="blog-eyebrow">{{ article.data.author }} · {{ article.data.date | dateFr }}</p>
+          <h2>{{ article.data.title }}</h2>
+          <p>{{ article.data.excerpt }}</p>
+          <span class="blog-read-more">Lire l'article →</span>
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </section>
+  {% else %}
+  <p class="blog-empty">Les premiers articles arrivent bientôt.</p>
+  {% endif %}
+</main>

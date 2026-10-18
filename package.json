@@ -1,0 +1,15 @@
+{
+  "name": "empire-lebuu",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "validate:content": "node scripts/validate-content.js",
+    "build": "npm run validate:content && node scripts/clean-output.js && eleventy && node scripts/optimize-images.js"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/gray-matter": "^1.0.0",
+    "markdown-it": "^14.1.0",
+    "sharp": "^0.35.5"
+  }
+}

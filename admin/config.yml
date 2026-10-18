@@ -1,0 +1,101 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: fr
+publish_mode: editorial_workflow
+site_url: https://delicate-beijinho-4ff122.netlify.app
+display_url: https://delicate-beijinho-4ff122.netlify.app
+# Évite qu'un brouillon affiche un lien de prévisualisation vers la production.
+show_preview_links: false
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# Les images sont converties à l'import, puis optimisées au build.
+media_folder: public/images/articles
+public_folder: /images/articles
+media_processing:
+  enabled: true
+  format:
+    enabled: true
+    default: webp
+  quality: 82
+  strip_metadata: true
+  width: 1800
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/articles
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: blog/{{slug}}/
+    summary: "{{title}} — {{date}}"
+    fields:
+      - label: Titre
+        name: title
+        widget: string
+        required: true
+      - label: Slug personnalisé (facultatif)
+        name: slug
+        widget: string
+        required: false
+        pattern:
+          - "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          - "Utilisez des minuscules, chiffres et tirets."
+        hint: "Par défaut, l'adresse est générée à partir du titre. Renseignez ce champ uniquement pour la personnaliser."
+      - label: Date de publication
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+        required: true
+      - label: Auteur
+        name: author
+        widget: string
+        default: "Empire Lebuu"
+        required: true
+      - label: Résumé
+        name: excerpt
+        widget: text
+        required: true
+      - label: Image de couverture
+        name: cover_image
+        widget: image
+        required: true
+      - label: Texte alternatif de la couverture
+        name: cover_alt
+        widget: string
+        required: true
+      - label: Étiquettes
+        name: tags
+        widget: list
+        required: false
+      - label: Contenu
+        name: body
+        widget: markdown
+        required: true
+      - label: Publié
+        name: published
+        widget: boolean
+        default: false
+        required: true
+        hint: "Désactivé : brouillon non visible sur le site public. Activé : article publié après validation du workflow."
+      - label: Titre SEO
+        name: seo_title
+        widget: string
+        required: false
+      - label: Description SEO
+        name: seo_description
+        widget: text
+        required: false
+      - label: Image Open Graph
+        name: seo_image
+        widget: image
+        required: false

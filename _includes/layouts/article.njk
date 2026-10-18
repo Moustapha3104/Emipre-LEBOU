@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+<main class="blog-main">
+  <a class="blog-back" href="/blog/">← Tous les articles</a>
+  <article class="blog-article">
+    <header class="blog-article-header">
+      <p class="blog-eyebrow">{{ author }} · <time datetime="{{ date | dateIso }}">{{ date | dateFr }}</time></p>
+      <h1>{{ title }}</h1>
+      <p class="blog-excerpt">{{ excerpt }}</p>
+      {% if cover_image %}
+      <img class="blog-cover" src="{{ cover_image | articleImage }}" alt="{{ cover_alt }}" width="1200" height="675">
+      {% endif %}
+    </header>
+    <div class="blog-prose">{{ content | safe }}</div>
+    {% if tags and tags.length %}
+    <ul class="blog-tags" aria-label="Étiquettes">
+      {% for tag in tags %}<li>{{ tag }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </article>
+</main>

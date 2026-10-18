@@ -16,6 +16,12 @@
   min-height: 44px;
 }
 
+.site-category-nav > a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
 .nav-contact {
   display: inline-flex;
   min-height: 44px;
