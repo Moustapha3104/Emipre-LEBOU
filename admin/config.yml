@@ -3,7 +3,6 @@ backend:
   branch: main
 
 locale: fr
-publish_mode: editorial_workflow
 site_url: https://empirelebou.netlify.app
 display_url: https://empirelebou.netlify.app
 logo_url: /logo-transparent.png
@@ -100,3 +99,41 @@ collections:
         widget: image
         required: false
         hint: "Image partagée sur les réseaux sociaux. Par défaut, l'image de couverture est utilisée."
+
+  - name: products
+    label: Produits
+    label_singular: Produit
+    folder: src/content/products
+    create: true
+    extension: json
+    format: json
+    identifier_field: title
+    summary: "{{category}} — {{title}}"
+    fields:
+      - label: Catégorie
+        name: category
+        widget: select
+        options:
+          - { label: Homme, value: HOMME }
+          - { label: Femme, value: FEMME }
+          - { label: Unisexe, value: UNISEXE }
+        required: true
+      - label: Image du produit
+        name: image
+        widget: image
+        required: true
+        hint: "L'image apparaît dans la carte produit. Elle est automatiquement optimisée en WebP au déploiement."
+      - label: Titre
+        name: title
+        widget: string
+        required: true
+      - label: Description
+        name: description
+        widget: text
+        required: true
+      - label: Publié
+        name: published
+        widget: boolean
+        default: false
+        required: true
+        hint: "Désactivé : le produit reste absent du catalogue public. Activez-le et enregistrez pour le publier."

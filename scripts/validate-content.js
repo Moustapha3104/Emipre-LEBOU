@@ -3,6 +3,7 @@ const path = require("node:path");
 const matter = require("@11ty/gray-matter");
 
 const articlesDirectory = path.join(process.cwd(), "src", "content", "articles");
+const productsDirectory = path.join(process.cwd(), "src", "content", "products");
 const mediaDirectory = path.join(process.cwd(), "public", "images", "articles");
 const markdownImagePattern = /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
 const errors = [];
@@ -67,12 +68,53 @@ function validateArticle(filePath) {
   markdownImagePattern.lastIndex = 0;
 }
 
+function validateProduct(filePath) {
+  const relativePath = path.relative(process.cwd(), filePath);
+  let product;
+  try {
+    product = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  } catch (error) {
+    errors.push(`${relativePath}: le fichier produit doit contenir un JSON valide (${error.message}).`);
+    return;
+  }
+
+  for (const field of ["title", "description", "image"]) {
+    if (typeof product[field] !== "string" || product[field].trim() === "") {
+      errors.push(`${relativePath}: le champ « ${field} » est obligatoire.`);
+    }
+  }
+  if (!["HOMME", "FEMME", "UNISEXE"].includes(product.category)) {
+    errors.push(`${relativePath}: la catégorie doit être HOMME, FEMME ou UNISEXE.`);
+  }
+  if (typeof product.published !== "boolean") {
+    errors.push(`${relativePath}: le statut « published » doit être vrai ou faux.`);
+  }
+  if (typeof product.image === "string") {
+    if (!product.image.startsWith("/images/articles/")) {
+      errors.push(`${relativePath}: l'image doit être stockée dans /images/articles/.`);
+    } else {
+      const relativeImage = decodeURIComponent(product.image.slice("/images/articles/".length).split(/[?#]/)[0]);
+      const absoluteImage = path.resolve(mediaDirectory, relativeImage);
+      if (!absoluteImage.startsWith(`${path.resolve(mediaDirectory)}${path.sep}`) || !fs.existsSync(absoluteImage)) {
+        errors.push(`${relativePath}: l'image « ${product.image} » est introuvable.`);
+      }
+    }
+  }
+}
+
 for (const article of markdownFiles(articlesDirectory)) validateArticle(article);
+if (fs.existsSync(productsDirectory)) {
+  for (const entry of fs.readdirSync(productsDirectory, { withFileTypes: true })) {
+    if (entry.isFile() && entry.name.endsWith(".json")) {
+      validateProduct(path.join(productsDirectory, entry.name));
+    }
+  }
+}
 
 if (errors.length) {
-  console.error("Validation des articles échouée :");
+  console.error("Validation du contenu échouée :");
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log("Validation des articles réussie.");
+  console.log("Validation du contenu réussie.");
 }

@@ -1,4 +1,6 @@
 const markdownIt = require("markdown-it");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const productionSiteUrl = "https://empirelebou.netlify.app";
 
@@ -33,7 +35,27 @@ module.exports = function (eleventyConfig) {
       .sort((left, right) => new Date(right.data.date) - new Date(left.data.date)),
   );
 
+  eleventyConfig.addCollection("publishedCatalogProducts", () => {
+    const productsDirectory = path.join(process.cwd(), "src", "content", "products");
+    if (!fs.existsSync(productsDirectory)) return [];
+
+    return fs.readdirSync(productsDirectory, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
+      .map((entry) => JSON.parse(fs.readFileSync(path.join(productsDirectory, entry.name), "utf8")))
+      .filter((product) => product.published === true)
+      .sort((left, right) => left.title.localeCompare(right.title, "fr"));
+  });
+
   eleventyConfig.addFilter("articleImage", optimizedArticleImage);
+  eleventyConfig.addFilter("catalogProductsJson", (products) =>
+    JSON.stringify(products.map((product) => ({
+      category: product.category,
+      name: product.title,
+      description: product.description,
+      image: optimizedArticleImage(product.image),
+      alt: product.title,
+    }))),
+  );
   eleventyConfig.addFilter("dateIso", (value) => new Date(value).toISOString());
   eleventyConfig.addFilter("dateFr", (value) =>
     new Intl.DateTimeFormat("fr-FR", { dateStyle: "long", timeZone: "UTC" }).format(new Date(value)),

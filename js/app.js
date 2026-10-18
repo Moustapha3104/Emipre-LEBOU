@@ -120,6 +120,9 @@ const PRODUCTS = {
 ],
 }
 
+let catalogProducts = []
+let activeCategory = 'HOMME'
+
 const HERO = {
   HOMME: {
     title: ['Élégance', 'Masculine'],
@@ -201,6 +204,7 @@ function productCard(product) {
 }
 
 function render(category) {
+  activeCategory = category
   const hero = HERO[category]
   document.getElementById('hero-title-1').textContent = hero.title[0]
   document.getElementById('hero-title-2').textContent = hero.title[1]
@@ -212,7 +216,8 @@ function render(category) {
   document.getElementById('catalogue-title').textContent = `Collection ${category.toLowerCase()}`
 
   const grid = document.getElementById('grid')
-  grid.replaceChildren(...PRODUCTS[category].map(productCard))
+  const categoryProducts = catalogProducts.filter((product) => product.category === category)
+  grid.replaceChildren(...PRODUCTS[category].concat(categoryProducts).map(productCard))
   grid.classList.remove('animate-fade')
   void grid.offsetWidth // relance l'animation
   grid.classList.add('animate-fade')
@@ -240,4 +245,16 @@ document.querySelectorAll('[data-wa-icon]').forEach((n) => n.replaceWith(waIcon(
 
 const fromHash = location.hash.slice(1).toUpperCase()
 render(PRODUCTS[fromHash] ? fromHash : 'HOMME')
+
+fetch('/data/catalog-products.json', { cache: 'no-cache' })
+  .then((response) => {
+    if (!response.ok) throw new Error(`Chargement du catalogue impossible (HTTP ${response.status}).`)
+    return response.json()
+  })
+  .then((products) => {
+    if (!Array.isArray(products)) throw new TypeError('Le catalogue reçu n’est pas une liste de produits.')
+    catalogProducts = products
+    render(activeCategory)
+  })
+  .catch((error) => console.error('Les nouveaux produits du catalogue n’ont pas pu être chargés :', error))
 })()
