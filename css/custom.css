@@ -1,0 +1,132 @@
+.site-header-content {
+  gap: 1rem;
+}
+
+.site-header-content > a:first-child img {
+  display: block;
+  width: auto;
+  height: 44px;
+}
+
+.site-category-nav {
+  margin-left: auto;
+}
+
+.site-category-nav button {
+  min-height: 44px;
+}
+
+.nav-contact {
+  display: inline-flex;
+  min-height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(201, 168, 108, 0.45);
+  padding: 0.7rem 1rem;
+  color: #c9a86c;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-contact:hover {
+  border-color: #c9a86c;
+  background-color: #c9a86c;
+  color: #0a0a0a;
+}
+
+.nav-contact svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.social-link {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(201, 168, 108, 0.2);
+  color: #c9a86c;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.social-link:hover {
+  border-color: #c9a86c;
+  background-color: rgba(201, 168, 108, 0.1);
+  color: #f5f0eb;
+}
+
+.social-link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+.social-link svg .social-icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+@media (max-width: 640px) {
+  .site-header-content {
+    height: auto;
+    min-height: 4.25rem;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .site-header-content > a:first-child img {
+    height: 2.75rem;
+  }
+
+  .site-category-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .site-category-nav button {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.65rem;
+  }
+
+  .hero-image-panel {
+    display: block;
+    height: 18rem;
+  }
+
+  .nav-contact {
+    margin-left: auto;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-header-content > a:first-child img {
+    height: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-contact,
+  .social-link {
+    transition: none;
+  }
+}
