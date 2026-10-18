@@ -22,6 +22,11 @@ eleventyExcludeFromCollections: true
           <p class="blog-eyebrow">{{ article.data.author }} · {{ article.data.date | dateFr }}</p>
           <h2>{{ article.data.title }}</h2>
           <p>{{ article.data.excerpt }}</p>
+          {% if article.data.tags and article.data.tags.length %}
+          <ul class="blog-tags" aria-label="Étiquettes">
+            {% for tag in article.data.tags %}<li>{{ tag }}</li>{% endfor %}
+          </ul>
+          {% endif %}
           <span class="blog-read-more">Lire l'article →</span>
         </div>
       </a>

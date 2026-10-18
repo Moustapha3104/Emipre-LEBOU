@@ -4,7 +4,7 @@
 
 Le site vitrine reste en HTML/CSS/JavaScript. Eleventy génère les pages du blog et le sitemap lors du build Netlify. Les articles source sont versionnés en Markdown dans `src/content/articles/`. Les images JPEG, PNG et WebP importées par le CMS sont converties en WebP, limitées à 1800 px de largeur et débarrassées de leurs métadonnées avant l'enregistrement ; le build produit ensuite les images WebP servies par le site. Les formats non pris en charge par cette conversion, comme SVG et GIF, ne sont pas acceptés par le build.
 
-Le dépôt ne contenait pas d'articles ni de format de frontmatter existant : il n'y a donc pas de migration d'articles à effectuer. Le slug de l'URL est généré depuis le titre/fichier par défaut ; le champ de slug personnalisé permet de le remplacer.
+Le dépôt ne contenait pas d'articles ni de format de frontmatter existant : il n'y a donc pas de migration d'articles à effectuer. Le slug de l'URL est généré depuis le titre et peut être modifié dans le champ de slug du CMS. Il correspond au nom du fichier Markdown (et non à un champ supplémentaire du frontmatter).
 
 En production, seuls les articles avec `published: true` sont générés. Les Deploy Previews Netlify incluent aussi les brouillons pour permettre leur relecture. Les changements de brouillon faits dans le CMS suivent le workflow éditorial et ne remplacent pas le site de production avant validation/publication.
 
@@ -31,7 +31,7 @@ Les modèles d'e-mail personnalisés ne sont pas nécessaires. Avec le modèle N
 ## Rédiger un article
 
 1. Dans `/admin/`, sélectionnez **Articles → Nouvel article**.
-2. Remplissez le titre, la date, l’auteur et le résumé. Le slug est généré depuis le titre ; renseignez le champ facultatif uniquement pour définir une URL personnalisée.
+2. Remplissez le titre, la date, l’auteur et le résumé. Ces champs alimentent directement la carte du journal et l'en-tête de l'article. Le slug est généré depuis le titre ; modifiez le champ de slug du CMS uniquement pour définir une URL personnalisée.
 3. Choisissez l’image de couverture et renseignez son texte alternatif descriptif.
 4. Rédigez le contenu en Markdown. Le CMS fournit un aperçu du Markdown. Donnez un texte alternatif à chaque image du corps, par exemple `![Robe rose portée en extérieur](/images/articles/robe-rose.webp)`.
 5. Complétez les étiquettes et, si besoin, les champs SEO. À défaut, le titre et le résumé servent de valeurs SEO.
@@ -41,6 +41,10 @@ Les modèles d'e-mail personnalisés ne sont pas nécessaires. Avec le modèle N
 9. Pour dépublier, désactivez **Publié** et fusionnez la modification. L’article est retiré des pages générées en production et du sitemap.
 
 Le délai de mise en ligne dépend de la durée réelle du build et du déploiement Netlify.
+
+### En cas de « Failed to fetch » à l'enregistrement
+
+L'enregistrement Git Gateway nécessite une session Netlify Identity active. Vérifiez d'abord que le CMS affiche votre compte connecté, puis reconnectez-vous sur le domaine `empirelebou.netlify.app`. Dans **Identity → Users**, le compte doit exister et avoir terminé son invitation. Si le message persiste, ouvrez les outils développeur du navigateur, filtrez **Network** sur `/.netlify/git/` et relevez uniquement le chemin de la requête et son code HTTP ; ne partagez jamais de jeton, cookie ou en-tête `Authorization`.
 
 ## Configuration de build et variables
 

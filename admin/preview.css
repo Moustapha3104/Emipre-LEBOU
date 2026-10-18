@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  padding: 1.5rem;
+  background: #0a0a0a;
+  color: #f5f0eb;
+  font-family: Inter, "Segoe UI", sans-serif;
+  line-height: 1.75;
+}
+
+h1,
+h2,
+h3 {
+  color: #f5f0eb;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+a {
+  color: #c9a86c;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+blockquote,
+pre,
+table {
+  border: 1px solid rgba(201, 168, 108, 0.25);
+  padding: 1rem;
+  background: #111;
+}
+
+code {
+  color: #c9a86c;
+}

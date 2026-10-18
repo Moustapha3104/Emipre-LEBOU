@@ -6,6 +6,7 @@ locale: fr
 publish_mode: editorial_workflow
 site_url: https://empirelebou.netlify.app
 display_url: https://empirelebou.netlify.app
+logo_url: /logo-transparent.png
 # Évite qu'un brouillon affiche un lien de prévisualisation vers la production.
 show_preview_links: false
 slug:
@@ -35,20 +36,14 @@ collections:
     format: frontmatter
     slug: "{{slug}}"
     preview_path: blog/{{slug}}/
-    summary: "{{title}} — {{date}}"
+    summary: "{{title}} — {{date}} · {{author}}"
+    sortable_fields: [date, title]
     fields:
       - label: Titre
         name: title
         widget: string
         required: true
-      - label: Slug personnalisé (facultatif)
-        name: slug
-        widget: string
-        required: false
-        pattern:
-          - "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          - "Utilisez des minuscules, chiffres et tirets."
-        hint: "Par défaut, l'adresse est générée à partir du titre. Renseignez ce champ uniquement pour la personnaliser."
+        hint: "Ce titre apparaît sur la carte du journal et en haut de l'article. L'adresse est générée depuis le titre et reste modifiable dans le champ de slug du CMS."
       - label: Date de publication
         name: date
         widget: datetime
@@ -65,22 +60,27 @@ collections:
         name: excerpt
         widget: text
         required: true
+        hint: "Ce texte apparaît sur la carte du journal, sous le titre. Préférez une ou deux phrases."
       - label: Image de couverture
         name: cover_image
         widget: image
         required: true
+        hint: "Cette image est utilisée sur la carte du journal et en tête de l'article."
       - label: Texte alternatif de la couverture
         name: cover_alt
         widget: string
         required: true
+        hint: "Décrivez l'image pour les lecteurs d'écran."
       - label: Étiquettes
         name: tags
         widget: list
         required: false
+        hint: "Elles apparaissent sur la carte et à la fin de l'article."
       - label: Contenu
         name: body
         widget: markdown
         required: true
+        hint: "Rédigez en Markdown. Pour chaque image, ajoutez un texte alternatif descriptif."
       - label: Publié
         name: published
         widget: boolean
@@ -99,3 +99,4 @@ collections:
         name: seo_image
         widget: image
         required: false
+        hint: "Image partagée sur les réseaux sociaux. Par défaut, l'image de couverture est utilisée."

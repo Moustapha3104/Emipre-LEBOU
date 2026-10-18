@@ -27,9 +27,7 @@ function validateArticle(filePath) {
       errors.push(`${relativePath}: le champ « ${field} » est obligatoire.`);
     }
   }
-  const slug = typeof data.slug === "string" && data.slug.trim()
-    ? data.slug.trim()
-    : path.basename(filePath, ".md");
+  const slug = path.basename(filePath, ".md");
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
     errors.push(`${relativePath}: le slug doit contenir uniquement des minuscules, chiffres et tirets.`);
   } else {

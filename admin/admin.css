@@ -1,0 +1,77 @@
+:root {
+  color-scheme: dark;
+  --empire-black: #0a0a0a;
+  --empire-panel: #111;
+  --empire-gold: #c9a86c;
+  --empire-cream: #f5f0eb;
+  --empire-muted: #b9aea3;
+}
+
+html,
+body,
+#nc-root {
+  min-height: 100%;
+  background: var(--empire-black);
+}
+
+#nc-root {
+  color: var(--empire-cream);
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+#nc-root [class*="AppHeader"],
+#nc-root [class*="AuthenticationPage"] {
+  background: var(--empire-black);
+  color: var(--empire-cream);
+}
+
+#nc-root [class*="ControlPane"],
+#nc-root [class*="PreviewPane"],
+#nc-root [class*="CollectionPage"],
+#nc-root [class*="EntryEditor"] {
+  background-color: var(--empire-black);
+  color: var(--empire-cream);
+}
+
+#nc-root [class*="ControlLabel"],
+#nc-root [class*="FieldLabel"],
+#nc-root [class*="Label"] {
+  color: var(--empire-gold);
+}
+
+#nc-root input,
+#nc-root textarea,
+#nc-root select {
+  border: 1px solid rgba(201, 168, 108, 0.35);
+  border-radius: 0;
+  background: var(--empire-panel);
+  color: var(--empire-cream);
+}
+
+#nc-root input:focus,
+#nc-root textarea:focus,
+#nc-root select:focus {
+  border-color: var(--empire-gold);
+  outline: 2px solid rgba(201, 168, 108, 0.35);
+  outline-offset: 1px;
+}
+
+#nc-root a {
+  color: var(--empire-gold);
+}
+
+#nc-root [class*="Button-button"] {
+  border-radius: 0;
+}
+
+#nc-root button:focus-visible,
+#nc-root a:focus-visible {
+  outline: 2px solid var(--empire-gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 48rem) {
+  #nc-root {
+    font-size: 0.95rem;
+  }
+}
