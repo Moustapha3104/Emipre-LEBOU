@@ -1,0 +1,1 @@
+window.netlifyIdentity.setLocale('fr')

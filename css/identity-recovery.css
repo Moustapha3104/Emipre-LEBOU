@@ -1,0 +1,44 @@
+body {
+  display: grid;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1.5rem;
+  place-items: center;
+  background: #0a0a0a;
+  color: #f5f0eb;
+  font-family: Inter, sans-serif;
+}
+
+main {
+  width: min(100%, 34rem);
+  text-align: center;
+}
+
+main > a:first-child {
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+main img {
+  display: block;
+  width: auto;
+  height: 4rem;
+}
+
+h1 {
+  color: #c9a86c;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  font-weight: 500;
+}
+
+p {
+  color: #b9aea3;
+  line-height: 1.7;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  color: #c9a86c;
+}

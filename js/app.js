@@ -4,8 +4,8 @@
 // Netlify Identity sends recovery and invitation tokens to the site URL.
 // Forward them before the catalogue replaces the URL fragment with its category.
 const identityHash = new URLSearchParams(window.location.hash.slice(1))
-if (['recovery_token', 'invite_token', 'confirmation_token'].some((token) => identityHash.has(token))) {
-  window.location.replace(`/admin/${window.location.hash}`)
+if (['recovery_token', 'invite_token', 'confirmation_token', 'email_change_token'].some((token) => identityHash.has(token))) {
+  window.location.replace(`/admin/recovery.html${window.location.hash}`)
   return
 }
 

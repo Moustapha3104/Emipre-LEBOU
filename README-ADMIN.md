@@ -22,15 +22,11 @@ Les Deploy Previews ne sont pas produits par chaque sauvegarde : Netlify en cons
 
 ### Lien de réinitialisation du mot de passe
 
-Le modèle de récupération fourni dans `identity/recovery.html` pointe directement vers `/admin/#recovery_token=...`, afin que le widget Identity affiche le formulaire de nouveau mot de passe.
+Les modèles d'e-mail personnalisés ne sont pas nécessaires. Avec le modèle Netlify standard, le lien arrive à la racine du site avec un jeton dans le fragment de l'URL. `js/app.js` transfère ce jeton vers `/admin/recovery.html`, une page dédiée qui charge le widget Identity sans le routeur Decap CMS. Cette séparation évite que la navigation interne du CMS efface le jeton avant son traitement.
 
-Après déploiement du fichier :
-
-1. Dans Netlify, ouvrez **Identity → Emails → Recovery email** et choisissez le modèle personnalisé. Indiquez `/identity/recovery.html` comme chemin du modèle, puis enregistrez.
-2. Demandez un nouvel e-mail de récupération depuis **Identity → Users**. Les liens déjà envoyés restent inchangés.
-3. Dans l'e-mail, cliquez sur **Choisir un nouveau mot de passe**. Le formulaire doit s'ouvrir sur `/admin/`.
-
-Netlify réserve la personnalisation des modèles d'e-mail aux offres qui incluent cette option. Si le champ de modèle personnalisé n'est pas disponible dans votre tableau de bord, demandez une nouvelle récupération depuis le bouton **Forgot password?** de `/admin/` après avoir confirmé que Git Gateway et Identity sont actifs ; le transfert automatique du jeton depuis la page d'accueil est également géré par `js/app.js`.
+1. Déployez la version qui contient `admin/recovery.html` et `js/identity-locale.js`.
+2. Depuis `/admin/`, demandez un nouvel e-mail avec **Forgot password?** ; les anciens liens ne changent pas.
+3. Ouvrez le nouveau lien. Le formulaire Netlify doit afficher la demande de nouveau mot de passe, puis vous pourrez vous connecter à `/admin/`.
 
 ## Rédiger un article
 
