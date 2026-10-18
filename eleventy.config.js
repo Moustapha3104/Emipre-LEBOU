@@ -2,7 +2,7 @@ const markdownIt = require("markdown-it");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const productionSiteUrl = "https://empirelebou.netlify.app";
+const productionSiteUrl = "https://empirelebuu.netlify.app";
 
 function optimizedArticleImage(source) {
   if (typeof source !== "string") return "";

@@ -16,7 +16,7 @@ En production, seuls les articles et produits avec `published: true` sont affich
 4. Dans **Site configuration → Build & deploy → Continuous deployment**, vérifiez que le dépôt GitHub `Moustapha3104/Emipre-LEBOU` est bien lié et que la branche de production est `main`.
 5. Activez les Deploy Previews pour les pull requests de ce dépôt si vous souhaitez prévisualiser les changements faits hors du CMS. Le CMS enregistre directement sur `main` pour déclencher la mise en ligne automatique.
 6. Dans **Identity → Users**, invitez votre adresse email. Ouvrez le lien d’invitation reçu et définissez un mot de passe.
-7. Ouvrez `https://empirelebou.netlify.app/admin/`, connectez-vous et vérifiez que la collection **Articles** est visible.
+7. Ouvrez `https://empirelebuu.netlify.app/admin/`, connectez-vous et vérifiez que les collections **Articles** et **Produits** sont visibles.
 8. La collection **Produits** permet d'ajouter les articles affichés dans le catalogue Homme, Femme ou Unisexe.
 
 Chaque enregistrement dans le CMS déclenche le build de production. Les Deploy Previews ne sont produits que pour les pull requests et ne sont pas nécessaires pour publier un produit.
@@ -53,7 +53,7 @@ Les cartes déjà présentes dans le code restent en place ; les nouveaux produi
 
 ### En cas de « Failed to fetch » à l'enregistrement
 
-L'enregistrement Git Gateway nécessite une session Netlify Identity active. Vérifiez d'abord que le CMS affiche votre compte connecté, puis reconnectez-vous sur le domaine `empirelebou.netlify.app`. Dans **Identity → Users**, le compte doit exister et avoir terminé son invitation. Si le message persiste, ouvrez les outils développeur du navigateur, filtrez **Network** sur `/.netlify/git/` et relevez uniquement le chemin de la requête et son code HTTP ; ne partagez jamais de jeton, cookie ou en-tête `Authorization`.
+L'enregistrement Git Gateway nécessite une session Netlify Identity active. Vérifiez d'abord que le CMS affiche votre compte connecté, puis reconnectez-vous sur le domaine `empirelebuu.netlify.app`. Dans **Identity → Users**, le compte doit exister et avoir terminé son invitation. Si le message persiste, ouvrez les outils développeur du navigateur, filtrez **Network** sur `/.netlify/git/` et relevez uniquement le chemin de la requête et son code HTTP ; ne partagez jamais de jeton, cookie ou en-tête `Authorization`.
 
 ## Configuration de build et variables
 
@@ -63,7 +63,7 @@ Variable non secrète définie par défaut dans `netlify.toml` :
 
 | Variable | Valeur par défaut | Utilité |
 | --- | --- | --- |
-| `SITE_URL` | `https://empirelebou.netlify.app` | Domaine utilisé pour les URL canoniques, Open Graph et le sitemap. Remplacez-la par votre domaine personnalisé si nécessaire. |
+| `SITE_URL` | `https://empirelebuu.netlify.app` | Domaine utilisé pour les URL canoniques, Open Graph et le sitemap. Remplacez-la par votre domaine personnalisé si nécessaire. |
 
 Aucun secret ou jeton ne doit être ajouté au dépôt ni à une variable de build pour l’authentification : Identity et Git Gateway gèrent cette connexion.
 

@@ -3,8 +3,8 @@ backend:
   branch: main
 
 locale: fr
-site_url: https://empirelebou.netlify.app
-display_url: https://empirelebou.netlify.app
+site_url: https://empirelebuu.netlify.app
+display_url: https://empirelebuu.netlify.app
 logo_url: /logo-transparent.png
 # Évite qu'un brouillon affiche un lien de prévisualisation vers la production.
 show_preview_links: false
